@@ -237,6 +237,12 @@ namespace Hierarchy.Console
                 new Employee{Name = "Cheranga", Id = 666, ManagerId = null}
             };
 
+            var employeesCollection3 = new List<Employee>
+            {
+                new Employee{Name = "CEO", Id = 1, ManagerId = null},
+                new Employee{Name = "Alan", Id = 2, ManagerId = 1}
+            };
+
             var hierarchy1 = GetHierarchy(employeesCollection1);
             System.Console.ForegroundColor = ConsoleColor.Cyan;
             System.Console.WriteLine("NON GENERIC APPROACH...\n===========================");
@@ -255,6 +261,16 @@ namespace Hierarchy.Console
                 }
             });
             Display(hierarchy2,employee => employee.Team, employee => employee.Name);
+
+
+            var hierarchy3 = GetHierarchy(employeesCollection3, employee => employee.Id, employee => employee.ManagerId, (employee, subOrdinate) =>
+            {
+                if (employee != null && subOrdinate != null)
+                {
+                    employee.Team = employee.Team ?? new List<Employee>();
+                    employee.Team.Add(subOrdinate);
+                }
+            });
 
 
             System.Console.ResetColor();
