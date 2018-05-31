@@ -46,7 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Algorithms\Relationship.cs" />
+    <Compile Include="Algorithms\NodeExtensions.cs" />
+    <Compile Include="Algorithms\Node.cs" />
     <Compile Include="Employee.cs" />
     <Compile Include="HierarchyResult.cs" />
     <Compile Include="Program.cs" />

@@ -33,14 +33,14 @@ namespace Hierarchy.Console
                 new Customer{Name = "Cheranga", Id = 666, ManagerId = 666}
             };
 
-            var relationships = customerCollection1.GetRelationships(x => x.Id, x => x.ManagerId);
+            var relationships = customerCollection1.GetNodes(x => x.Id, x => x.ManagerId);
 
             Display(relationships.First());
 
             System.Console.ReadLine();
         }
 
-        static void Display(Nodes<Customer> hierarchy)
+        static void Display(Node<Customer> hierarchy)
         {
             if (hierarchy == null)
             {
@@ -55,7 +55,7 @@ namespace Hierarchy.Console
             }
             else
             {
-                Action<Nodes<Customer>, string> displayFunc = null;
+                Action<Node<Customer>, string> displayFunc = null;
                 displayFunc = (customer, tabFormat) =>
                 {
                     if (customer == null)
@@ -65,11 +65,11 @@ namespace Hierarchy.Console
 
                     if (string.IsNullOrEmpty(tabFormat))
                     {
-                        System.Console.Write("\n{0}", customer.Item.Name);
+                        System.Console.Write("\n{0}", customer.Data.Name);
                     }
                     else
                     {
-                        System.Console.Write($"\n{tabFormat}{customer.Item.Name}");
+                        System.Console.Write($"\n{tabFormat}{customer.Data.Name}");
                     }
 
                     if (customer.SubNodes != null && customer.SubNodes.Any())
@@ -82,7 +82,7 @@ namespace Hierarchy.Console
                     }
                 };
 
-                System.Console.WriteLine(hierarchy.Item.Name);
+                System.Console.WriteLine(hierarchy.Data.Name);
                 System.Console.WriteLine();
                 foreach (var executiveTeam in hierarchy.SubNodes)
                 {
