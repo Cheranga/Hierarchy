@@ -14,6 +14,11 @@ namespace Hierarchy.Console
         public int Id { get; set; }
         public int ManagerId { get; set; }
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     class ProgramNew

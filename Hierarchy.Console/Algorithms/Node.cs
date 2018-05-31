@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace Hierarchy.Console.Algorithms
 {
+    [DebuggerDisplay("{" + nameof(DisplayName) + "}")]
     public class Node<TNode> where TNode : class
     {
         private readonly List<Node<TNode>> _subNodes;
@@ -32,5 +34,7 @@ namespace Hierarchy.Console.Algorithms
 
             return this;
         }
+
+        public string DisplayName => _data == null ? "" : _data.ToString();
     }
 }

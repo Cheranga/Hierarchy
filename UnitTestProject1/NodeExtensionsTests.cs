@@ -108,6 +108,33 @@ namespace Hierarchy.Tests
             Assert.IsTrue(nodes.First().SubNodes.All(x => x.SubNodes.Count == 2));
         }
 
+        [TestMethod]
+        public void When_There_Are_Too_Many_Bosses_In_Different_Levels_With_Valid_Connections()
+        {
+            var customers = new List<Customer>();
+
+            customers.AddRange(new []
+            {
+                new Customer{Id = 1, ManagerId = 1, Name = "1"},
+                new Customer{Id = 2, ManagerId = 1, Name = "1.1"},
+                new Customer{Id = 3, ManagerId = 2, Name = "1.1.1"},
+                new Customer{Id = 4, ManagerId = 3, Name = "1.1.1.1"},
+
+                new Customer{Id = 5, ManagerId = 5, Name = "5"},
+                new Customer{Id = 6, ManagerId = 5, Name = "5.1"},
+                new Customer{Id = 7, ManagerId = 6, Name = "5.1.1"},
+                new Customer{Id = 8, ManagerId = 7, Name = "5.1.1.1"},
+
+
+                new Customer{Id = 9, ManagerId = 7, Name = "5.1.1.2"},
+                new Customer{Id = 10, ManagerId = 9, Name = "5.1.1.2.1"},
+
+
+            });
+
+            var relationships = customers.GetNodes(x=>x.Id,x=>x.ManagerId);
+        }
+
         static void Display(Node<Customer> hierarchy)
         {
             if (hierarchy == null)
